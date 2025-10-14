@@ -1,0 +1,43 @@
+# Секретные данные
+.env
+
+# База данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Кеш и временные файлы
+*.log
+*.pot
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Разное
+*.bak
+*.tmp
+.cache/
+
+
