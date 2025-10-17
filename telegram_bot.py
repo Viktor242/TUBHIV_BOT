@@ -7,6 +7,8 @@
 import logging
 import asyncio
 from datetime import datetime, timedelta
+import threading
+from aiohttp import web
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
@@ -675,6 +677,14 @@ class TelegramBot:
                 self.scheduler.shutdown()
             await self.bot.session.close()
 
+async def handle(request):
+    return web.Response(text="Bot is alive")
+
+def start_keepalive_server():
+    app = web.Application()
+    app.router.add_get("/", handle)
+    web.run_app(app, host="0.0.0.0", port=10000)
+
 def main():
     """Главная функция"""
     logging.basicConfig(
@@ -692,4 +702,5 @@ def main():
         logger.error(f"Критическая ошибка: {e}")
 
 if __name__ == "__main__":
+    threading.Thread(target=start_keepalive_server, daemon=True).start()
     main()
