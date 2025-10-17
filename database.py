@@ -32,25 +32,21 @@ class User(Base):
     username = Column(String, nullable=True)
     language = Column(String, default="ru")
     created_at = Column(DateTime, default=get_vladivostok_time)
+    blocked = Column(Boolean, default=False)
+    
+    # Срок окончания обследования (30 дней с момента выбора диагноза)
+    deadline = Column(DateTime, nullable=True)
+    
+    # Отметки о отправленных уведомлениях
+    reminder_5h = Column(Boolean, default=False)  # Напоминание через 5 часов (только для русских)
+    reminder_5d = Column(Boolean, default=False)  # Напоминание через 5 дней
+    reminder_10d = Column(Boolean, default=False) # Напоминание через 10 дней
+    reminder_15d = Column(Boolean, default=False) # Напоминание через 15 дней
+    reminder_20d = Column(Boolean, default=False) # Напоминание через 20 дней
+    reminder_25d = Column(Boolean, default=False) # Напоминание через 25 дней
+    reminder_30d = Column(Boolean, default=False) # Финальное напоминание через 30 дней
 
-    cases = relationship("Case", back_populates="user", cascade="all, delete-orphan")
     activity = relationship("Activity", back_populates="user", cascade="all, delete-orphan")
-
-
-class Case(Base):
-    __tablename__ = "cases"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    category = Column(String, nullable=False)
-    registered_at = Column(DateTime, default=get_vladivostok_time)
-    deadline_at = Column(DateTime, nullable=False)
-    last_reminder_day = Column(Integer, default=0)
-    active = Column(Boolean, default=True)
-    completed = Column(Boolean, default=False)
-    expired = Column(Boolean, default=False)
-
-    user = relationship("User", back_populates="cases")
 
 
 class Activity(Base):
@@ -60,12 +56,6 @@ class Activity(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     action_type = Column(String, nullable=False)
     action_data = Column(String, nullable=True)
-    message_text = Column(String, nullable=True)
-    reminder_day = Column(Integer, nullable=True)
-    reminder_type = Column(String, nullable=True)
-    reminder_date = Column(DateTime, default=get_vladivostok_time)
-    is_final_reminder = Column(Boolean, default=False)
-    bot_deleted = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=get_vladivostok_time)
 
     user = relationship("User", back_populates="activity")

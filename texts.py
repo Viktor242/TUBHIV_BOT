@@ -17,13 +17,22 @@ TEXTS = {
         "consent": "Для продолжения работы с ботом необходимо ваше согласие на обработку персональных данных.\n\nНажмите кнопку ниже, чтобы продолжить.",
         "consent_button": "✅ Согласен",
         
+        # Выбор языка
+        "language_selection": "Выберите язык:",
+        "registration_info": """👤 ID пользователя: {user_id}
+📅 {registration_status}
+🕐 Дата регистрации: {registration_date}
+
+Выберите язык:""",
+        
         # Важное сообщение
         "important_message": "⚠️ ВАЖНОЕ СООБЩЕНИЕ\n\nПо Вам уже передали сведения в РОСПОТРЕБНАДЗОР. Если Вы не пройдете дообследования, Вы получите представление о НЕЖЕЛАТЕЛЬНОМ пребывании в Российской Федерации. Не медлите! У Вас есть один месяц!",
-        "understood_month": "✅ Понял, месяц",
+        "understood_month": "✅ Понял",
+        "understood_examination": "✅ Понял",
         
         # Выбор диагноза
-        "diagnosis_found": "📋 У ВАС ВЫЯВИЛИ\nВыберите свою кнопку:",
-        "category_select": "Выбери категорию:",
+        "diagnosis_found": "📋 Вам необходимо пройти дообследование",
+        "category_select": "📋 У вас выявлено заболевание. Пожалуйста, выберите из списка:",
         
         # Диагнозы
         "tuberculosis": "🫁 Туберкулёз",
@@ -34,44 +43,92 @@ TEXTS = {
         # Информация о диагнозах
         "tuberculosis_info": (
             "🫁 ТУБЕРКУЛЁЗ\n\n"
-            "Туберкулез- крайне опасное и заразное заболевание, которое может повлечь за собой смерть. "
-            "Оно передается воздушно- капельным путем. При своевременной диагностике (Манту, Диаскин-тест, флюорографии) можно вылечить навсегда! "
-            "Поэтому не переживайте, и скорее идите в Противотуберкулезный диспансер с нашим направлением в ГБУЗ ПКПТД по адресу Владивосток, 4-я Флотская 37/39, "
-            "у Вас есть 10 дней, чтобы дойти до врача фтизиатра. Возможно, Вам назначат посев мокроты и компьютерную томографию органов грудной полости."
+            "Туберкулёз — опасное и заразное заболевание, которое при отсутствии лечения может привести к смерти. Он передаётся воздушно-капельным путём, поэтому важно вовремя пройти обследование. При своевременной диагностике (пробы Манту, Диаскинтест, флюорография) туберкулёз полностью излечим. Не переживайте и как можно скорее обратитесь в Противотуберкулёзный диспансер с нашим направлением — ГБУЗ ПКПТД по адресу: Владивосток, ул. 4-я Флотская, 37/39. У вас есть 10 дней, чтобы посетить врача-фтизиатра. При необходимости врач может назначить посев мокроты и компьютерную томографию органов грудной клетки."
         ),
         "syphilis_info": (
             "🧬 СИФИЛИС\n\n"
-            "Сифилис- опасное инфекционное заболевание передающееся половым путем. Поддается лечению! "
-            "Поэтому не переживайте и скорее идите в Кожно-венерологический диспансер с нашим направлением с направлением ГБУЗ ККВД по адресу Владивосток, Гамарника 18 В, "
-            "у Вас есть 10 дней, чтобы дойти до врача дерматовенеролога."
+            "Сифилис — опасное инфекционное заболевание, передающееся преимущественно половым путём. Оно поддаётся лечению, особенно при своевременном обращении к врачу. Не переживайте и как можно скорее обратитесь в Кожно-венерологический диспансер с нашим направлением — ГБУЗ ККВД, по адресу: г. Владивосток, ул. Гамарника, 18В. У вас есть 10 дней, чтобы посетить врача-дерматовенеролога."
         ),
         "hiv_info": (
             "🧫 ВИЧ-ИНФЕКЦИЯ\n\n"
-            "ВИЧ-инфекция- заболевание, вызванное вирусом иммунодефицита человека. Вирус уничтожает клетки иммунитета, "
-            "которые помогают организму справиться с болезнетворными микроорганизмами. Антиретровирусная терапия продлила жизнь этих пациентов, "
-            "подавляя размножение этого вируса. Лечение в России данными препаратами невозможно, по юридическим причинам. "
-            "Для консультации Вам необходимо обратиться Краевая клиническая больница № 2, центр по профилактике и борьбе со СПИД и инфекционными заболеваниями по адресу Босисенко 50"
+            "ВИЧ-инфекция — это заболевание, вызываемое вирусом иммунодефицита человека (ВИЧ). Этот вирус поражает и уничтожает клетки иммунной системы, которые защищают организм от инфекций.\n\n"
+            "Современная антиретровирусная терапия (АРВТ) позволяет подавлять размножение вируса и значительно продлевает жизнь пациентов. Однако в России лечение данными препаратами по юридическим причинам недоступно.\n\n"
+            "Для получения консультации обратитесь в Краевую клиническую больницу № 2, Центр по профилактике и борьбе со СПИД и инфекционными заболеваниями, по адресу: г. Владивосток, ул. Босисенко, 50."
         ),
         "drug_addiction_info": (
             "💊 НАРКОМАНИЯ\n\n"
-            "Ваш биологический материал поехал в Краевой Наркологический диспансер. Помните! Положительный результат может не подтвердится, "
-            "поэтому не переживайте, ждите результата. Если результат окажется положительным, Вам лучше поехать домой и начать лечение, "
-            "а также Вы можете обратиться в Краевой Наркологический диспансер по адресу Станюковича 53 для оспаривания результата. Всего наилучшего!"
+            "Ваш биологический материал направлен в Краевой наркологический диспансер. Помните: положительный результат может не подтвердиться, поэтому не переживайте — дождитесь окончательного заключения. Если результат всё же окажется положительным, рекомендуется вернуться домой и начать лечение. Также вы можете обратиться в Краевой наркологический диспансер по адресу: г. Владивосток, ул. Станюковича, 53, чтобы при необходимости оспорить результат анализа. Всего вам наилучшего и крепкого здоровья!"
         ),
         
         # Кнопки действий
         "documents_reminder": "📋 Не забудьте с собой взять:\n• паспорт\n• миграционная карта\n• виза\n• регистрация",
-        "understood_10_days": "✅ Понял, 10 дней",
-        "understood_10_days_examination": "Понял, 10 дней пройти обследование",
+        "understood_10_days": "✅ Понял",
+        "understood_10_days_examination": "Понял, 10 дней",
         "show_documents": "📋 Документы",
-        "passed_examination": "✅ Прошел",
+        "examination_question": "Вы прошли дообследование?",
+        "passed_examination": "✅ Да",
         "not_passed_examination": "❌ Нет",
         "waiting_certificate": "Ждем Вас со справкой в ООО МО «Лотос» по адресу Владивосток, Стрелковая 23А",
+        "examination_completed": "✅ Отлично! Обследование пройдено успешно.",
+        "examination_required": "⚠️ Необходимо пройти обследование в течение 10 дней.",
+        "not_passed_message": "❌ Вы не прошли обследование. Необходимо пройти повторно.",
+        
+        # Статус
+        "status_examination": """📊 СТАТУС ОБСЛЕДОВАНИЯ
+
+👤 ID пользователя: {user_id}
+📅 Дата регистрации в боте: {registration_date}
+🩺 Дата выбора диагноза: {diagnosis_date}
+⏰ Срок окончания: {deadline_date}
+📆 {days_text}
+
+⚠️ Необходимо пройти обследование в течение 10 дней с выбора диагноза.""",
+        
+        "status_registration": """📊 СТАТУС РЕГИСТРАЦИИ
+
+👤 ID пользователя: {user_id}
+📅 Дата регистрации в боте: {registration_date}
+🩺 Статус: Ожидание выбора диагноза
+
+Выберите диагноз для начала процесса обследования.""",
+        
+        "days_left": "Осталось дней: {days}",
+        "last_day": "Последний день!",
+        "overdue": "Просрочено на {days} дней",
+        
+        # Статусы регистрации
+        "already_registered": "Вы уже зарегистрированы",
+        "just_registered": "Вы зарегистрировались",
+        "user_id": "ID пользователя",
+        "registration_date": "Дата регистрации",
+        "diagnosis_date": "Дата выбора диагноза",
+        "deadline_date": "Срок окончания",
+        "status": "Статус",
+        "waiting_diagnosis": "Ожидание выбора диагноза",
+        "choose_diagnosis": "Выберите диагноз для начала процесса обследования",
+        "click_for_status": "Нажмите кнопку для просмотра статуса:",
+        "click_for_help": "Нажмите кнопку для просмотра справки:",
+        "show_status": "📊 Показать статус",
+        "show_help": "❓ Показать справку",
+        
+        # Ошибки
+        "invalid_selection": "❌ Неверный выбор. Пожалуйста, выберите один из предложенных вариантов.",
         
         # Кнопки меню
         "start_button": "🚀 Старт",
         "status_button": "📊 Статус",
         "help_button": "❓ Помощь",
+        "main_menu_text": "Выберите действие:",
+        
+        # Команды бота
+        "start_command": "🆔 ID пользователя: {user_id}\n📅 Дата регистрации: {registration_date}\n✅ {registration_status}\n⏰ Осталось дней: {days_left}\n\n🌍 Выберите язык:",
+        "status_command": "📊 Статус регистрации",
+        "help_command": "❓ Справка по командам",
+        
+        # Описания команд для выпадающего меню
+        "start_cmd_desc": "🚀 Открыть меню",
+        "status_cmd_desc": "📊 Статус регистрации", 
+        "help_cmd_desc": "❓ Как работает бот?",
         
         # Описания команд для выпадающего меню
         "cmd_start_desc": "🚀 Открыть меню",
@@ -79,8 +136,6 @@ TEXTS = {
         "cmd_help_desc": "❓ Как работает бот?",
         
         # Результат
-        "result_received": "✅ Результат получен",
-        "result_received_message": "🎉 Отлично! Результат получен. Если нужно пройти другое обследование, выбери категорию:",
         
         # Помощь
         "help": "❓ Помощь",
@@ -94,53 +149,21 @@ TEXTS = {
         ),
         
         # Статус
-        "status_text": (
-    "📊 СТАТУС ОБСЛЕДОВАНИЯ\n\n"
-    "🆔 Ваш ID: {user_id}\n"
-    "Диагноз: {category}\n"
-    "Дата первого посещения: {registered_at}\n"
-    "Прошло дней: {days_passed}\n"
-    "Осталось дней: {days_remaining}\n"
-    "Дата окончания: {deadline_at}\n\n"
-    "{next_reminder_text}"
-        ),
         "no_active_case": "У тебя нет активных обследований. Нажми /start, чтобы начать.",
-        "case_stopped": "✅ Напоминания остановлены. Если нужно начать заново, нажми /start",
-        "expired_status": "⏰ СРОК ИСТЕК\n\n🆔 Ваш ID: {user_id}\nДиагноз: {category}\nДата первого посещения: {registered_at}\n\nСроки по дообследованию закончены. Ваши документы поданы в миграционную службу.",
         
-        # Тексты напоминаний
-        "next_reminder_5": "Следующее напоминание: на 5-й день (через {next_reminder} {day_word})",
-        "next_reminder_10": "Следующее напоминание: на 10-й день (через {next_reminder} {day_word})",
-        "next_reminder_15": "Следующее напоминание: на 15-й день (через {next_reminder} {day_word})",
-        "next_reminder_20": "Следующее напоминание: на 20-й день (через {next_reminder} {day_word})",
-        "next_reminder_25": "Следующее напоминание: на 25-й день (через {next_reminder} {day_word})",
-        "next_reminder_30": "Следующее напоминание: на 30-й день (через {next_reminder} {day_word}) - ФИНАЛЬНОЕ",
-        "all_reminders_sent": "Все напоминания отправлены. Обследование завершено.",
+        # Финальные уведомления
+    "final_reminder": "⚠️ ВНИМАНИЕ! Сроки по дообследованию закончены, Ваши документы поданы в миграционную службу.",
+    "bot_liquidation_message": "🚫 Ваш доступ к боту завершен. Сроки по дообследованию истекли.",
+    "regular_reminder": "⏰ Напоминание: прошло {days_passed}",
+        
         
         # Сообщения об ошибках
         "error_occurred": "Произошла ошибка. Пожалуйста, нажмите /start заново.",
         "choose_category": "Пожалуйста, выберите категорию из предложенных кнопок.",
+        "examination_reminder": "✅ Спасибо за выбор! Теперь вам необходимо пройти обследование в течение 30 дней с момента регистрации.",
         "no_active_examinations": "У Вас нет активных обследований.",
         "registration_status": "📊 СТАТУС РЕГИСТРАЦИИ\n\n🆔 Ваш ID: {user_id}\nДата регистрации: {registered_at}\nПрошло дней с регистрации: {days_since_registration}\n\nУ Вас пока нет активных обследований. Нажмите /start для начала.",
         
-        # Напоминания
-        "reminder_template": (
-            "⏰ НАПОМИНАНИЕ!\n\n"
-            "Прошло {days} дней с начала наблюдения по диагнозу: {category}\n"
-            "Осталось дней до окончания срока: {remaining}\n\n"
-            "Пожалуйста, не забудь вовремя пройти обследование!"
-        ),
-        "final_reminder": (
-            "⚠️ ВНИМАНИЕ!\n\n"
-            "Сроки по дообследованию закончены, Ваши документы поданы в миграционную службу.\n\n"
-            "Через 1 день доступ к боту будет ограничен."
-        ),
-        "bot_liquidation_message": (
-            "🚫 ЛИКВИДАЦИЯ БОТА\n\n"
-            "Сроки по дообследованию полностью закончены.\n"
-            "Ваши данные переданы в миграционную службу.\n\n"
-            "Доступ к боту ограничен."
-        ),
         
         # Переводы типов действий
         "action_bot_started": "Запуск бота",
@@ -175,13 +198,22 @@ TEXTS = {
         "consent": "Bot bilan ishlashni davom ettirish uchun shaxsiy ma'lumotlarni qayta ishlashga roziligingiz kerak.\n\nDavom etish uchun quyidagi tugmani bosing.",
         "consent_button": "✅ Roziman",
         
+        # Выбор языка
+        "language_selection": "Tilni tanlang:",
+        "registration_info": """👤 Foydalanuvchi ID: {user_id}
+📅 {registration_status}
+🕐 Ro'yxatdan o'tish sanasi: {registration_date}
+
+Tilni tanlang:""",
+        
         # Важное сообщение
         "important_message": "⚠️ MUHIM XABAR\n\nSiz haqingizda ma'lumotlar ROSPOTREBNADZORga uzatilgan. Agar siz qo'shimcha tekshiruvlarni o'tkazmasangiz, Rossiya Federatsiyasida istalmagan qolish haqida ta'kidnoma olasiz. Shoshiling! Sizda bir oy bor!",
-        "understood_month": "✅ Tushundim, oy",
+        "understood_month": "✅ Tushundim",
+        "understood_examination": "✅ Tushundim",
         
         # Выбор диагноза
-        "diagnosis_found": "📋 SIZDA ANIQLANDI\nO'z tugmangizni tanlang:",
-        "category_select": "Kategoriyani tanlang:",
+        "diagnosis_found": "📋 Sizga qo'shimcha tekshiruv kerak",
+        "category_select": "📋 Sizda kasallik aniqlandi. Iltimos, ro'yxatdan tanlang:",
         
         # Диагнозы
         "tuberculosis": "🫁 Sil kasalligi",
@@ -190,31 +222,76 @@ TEXTS = {
         "drug_addiction": "💊 Giynomaniya",
         
         # Информация о диагнозах (упрощенная версия на узбекском)
-        "tuberculosis_info": "🫁 SIL KASALLIGI\n\nSil kasalligi - juda xavfli va yuqumli kasallik bo'lib, o'limga olib kelishi mumkin. Havo orqali yuqadi. Vaqtida tashxis qo'yilsa (Mantu, Diaskin-test, flyuorografiya) butunlay davolash mumkin!",
-        "syphilis_info": "🧬 SIFILIS\n\nSifilis - jinsiy yo'l bilan yuqadigan xavfli yuqumli kasallik. Davolash mumkin!",
-        "hiv_info": "🧫 OIV-INFECTSIYA\n\nOIV-infektsiya - inson immunitet tanqisligi virusi tufayli yuzaga keladigan kasallik.",
+        "tuberculosis_info": (
+            "🫁 SIL KASALLIGI\n\n"
+            "Sil kasalligi - xavfli va yuqumli kasallik bo'lib, davolanmasa o'limga olib kelishi mumkin. U havo orqali yuqadi, shuning uchun vaqtida tekshiruvdan o'tish muhimdir. Vaqtida tashxis qo'yilsa (Mantu, Diaskin-test, flyuorografiya) sil butunlay davolash mumkin. Tashvishlanmang va bizning yo'naltiruvchi bilan imkon qadar tezroq Silga qarshi kurashish dispanserga murojaat qiling - GBUZ PKPTD manzili: Vladivostok, 4-Flot ko'chasi, 37/39. Sizda shifokor-fiziaterga borish uchun 10 kun vaqtingiz bor. Kerak bo'lsa, shifokor balg'am ekish va ko'krak qafasi a'zolarining kompyuter tomografiyasini buyurishi mumkin."
+        ),
+        "syphilis_info": (
+            "🧬 SIFILIS\n\n"
+            "Sifilis - asosan jinsiy yo'l bilan yuqadigan xavfli yuqumli kasallik. U davolash mumkin, ayniqsa shifokorga vaqtida murojaat qilganda. Tashvishlanmang va bizning yo'naltiruvchi bilan imkon qadar tezroq Teri-venerologik dispanserga murojaat qiling - GBUZ KKVVD, manzili: Vladivostok sh., Gamarnika ko'chasi, 18V. Sizda teri-venerolog shifokoriga borish uchun 10 kun vaqtingiz bor."
+        ),
+        "hiv_info": (
+            "🧫 OIV-INFECTSIYA\n\n"
+            "OIV-infektsiya - bu inson immunitet tanqisligi virusi (OIV) tufayli yuzaga keladigan kasallik. Bu virus immunitet tizimining hujayralarini zararlaydi va yo'q qiladi, ular organizmni infektsiyalardan himoya qiladi.\n\n"
+            "Zamonaviy antiretrovirus terapiyasi (ART) virusning ko'payishini bostirishga va bemorlarning hayotini sezilarli darajada uzaytirishga imkon beradi. Biroq, Rossiyada bu dorilar bilan davolash huquqiy sabablarga ko'ra mavjud emas.\n\n"
+            "Maslahat olish uchun Viloyat klinik kasalxonasi № 2, OIV va yuqumli kasalliklarni oldini olish va kurashish markaziga murojaat qiling, manzili: Vladivostok sh., Bosisenko ko'chasi, 50."
+        ),
         "drug_addiction_info": (
             "💊 GIYNOMANIYA\n\n"
-            "Sizning biologik materialingiz Viloyat narkologik dispanseriga yuborildi. Eslab qoling! "
-            "Ijobiy natija tasdiqlanmasligi mumkin, shuning uchun tashvishlanmang, natijani kuting. "
-            "Agar natija ijobiy bo'lsa, uyga qaytib, davolanishni boshlash yaxshiroq bo'ladi, "
-            "shuningdek, natijani rad etish uchun Stanjukovich 53 manzilidagi Viloyat narkologik dispanseriga murojaat qilishingiz mumkin. "
-            "Omad tilaymiz!"
+            "Sizning biologik materialingiz Viloyat narkologik dispanseriga yuborildi. Eslab qoling: ijobiy natija tasdiqlanmasligi mumkin, shuning uchun tashvishlanmang — yakuniy xulosani kutib turing. Agar natija baribir ijobiy bo'lsa, uyga qaytib, davolanishni boshlash tavsiya etiladi. Shuningdek, kerak bo'lsa, tahlil natijasini rad etish uchun Viloyat narkologik dispanserga murojaat qilishingiz mumkin, manzili: Vladivostok sh., Stanyukovich ko'chasi, 53. Sizga eng yaxshi va mustahkam salomatlik tilaymiz!"
         ),
         
         # Кнопки действий
         "documents_reminder": "📋 O'zingiz bilan olib kelishni unutmang:\n• pasport\n• migratsiya karta\n• viza\n• ro'yxatdan o'tish",
-        "understood_10_days": "✅ Tushundim, 10 kun",
-        "understood_10_days_examination": "Tushundim, 10 kun tekshiruvni o'tkazish",
+        "understood_10_days": "✅ Tushundim",
+        "understood_10_days_examination": "Tushundim, 10 kun",
         "show_documents": "📋 Hujjatlar",
-        "passed_examination": "✅ O'tkazdim",
+        "examination_question": "Siz qo'shimcha tekshiruvni o'tkazingizmi?",
+        "passed_examination": "✅ Ha",
         "not_passed_examination": "❌ Yo'q",
         "waiting_certificate": "Sizni OOO MO «Lotos»da, Vladivostok, Strelkovaya 23A manzilida spravka bilan kutamiz",
+        "examination_completed": "✅ Ajoyib! Tekshiruv muvaffaqiyatli o'tkazildi.",
+        "examination_required": "⚠️ 10 kun ichida tekshiruvni o'tkazish kerak.",
+        "not_passed_message": "❌ Siz tekshiruvni o'tkazmadingiz. Qaytadan o'tkazish kerak.",
+        
+        # Статусы регистрации
+        "already_registered": "Siz allaqachon ro'yxatdan o'tgansiz",
+        "just_registered": "Siz ro'yxatdan o'tdingiz",
+        "user_id": "Foydalanuvchi ID",
+        "registration_date": "Ro'yxatdan o'tish sanasi",
+        "diagnosis_date": "Tashxis tanlash sanasi",
+        "deadline_date": "Tugash sanasi",
+        "status": "Holat",
+        "waiting_diagnosis": "Tashxis tanlashni kutish",
+        "choose_diagnosis": "Tekshiruv jarayonini boshlash uchun tashxisni tanlang",
+        "click_for_status": "Holatni ko'rish uchun tugmani bosing:",
+        "click_for_help": "Yordamni ko'rish uchun tugmani bosing:",
+        "show_status": "📊 Holatni ko'rsatish",
+        "show_help": "❓ Yordamni ko'rsatish",
+        
+        # Ошибки
+        "invalid_selection": "❌ Noto'g'ri tanlov. Iltimos, taklif qilingan variantlardan birini tanlang.",
         
         # Кнопки меню
         "start_button": "🚀 Boshlash",
         "status_button": "📊 Holat",
         "help_button": "❓ Yordam",
+        "main_menu_text": "Amalni tanlang:",
+        
+        # Команды бота
+        "start_command": "🆔 Foydalanuvchi ID: {user_id}\n📅 Ro'yxatdan o'tish sanasi: {registration_date}\n✅ {registration_status}\n⏰ Qolgan kunlar: {days_left}\n\n🌍 Tilni tanlang:",
+        "status_command": "📊 Ro'yxatdan o'tish holati",
+        "help_command": "❓ Buyruqlar haqida ma'lumot",
+        
+        # Описания команд для выпадающего меню
+        "start_cmd_desc": "🚀 Menyuni ochish",
+        "status_cmd_desc": "📊 Ro'yxatdan o'tish holati",
+        "help_cmd_desc": "❓ Bot qanday ishlaydi?",
+        
+        # Статусы времени
+        "days_left": "Qolgan kunlar: {days}",
+        "last_day": "Oxirgi kun!",
+        "overdue": "Muddati o'tgan: {days} kun",
         
         # Описания команд для выпадающего меню
         "cmd_start_desc": "🚀 Menyuni ochish",
@@ -222,47 +299,25 @@ TEXTS = {
         "cmd_help_desc": "❓ Bot qanday ishlaydi?",
         
         # Результат
-        "result_received": "✅ Natija olindi",
-        "result_received_message": "🎉 Ajoyib! Natija olindi. Agar boshqa tekshiruvdan o'tish kerak bo'lsa, kategoriyani tanlang:",
         
         # Помощь
         "help": "❓ Yordam",
         "help_text": "📚 BOT HAQIDA MA'LUMOT\n\nBuyruqlar:\n/start - Bot bilan ishlashni boshlash\n/status - Ro'yxatdan o'tish holatini bilish\n/help - Bu yordamni ko'rsatish\n\nSizda 10 kun bor, yo'nalish bo'yicha borish uchun, bir oy ichida biz sizga komissiya natijalarini yuboramiz!",
         
         # Статус
-        "status_text": "📊 TEKSHIRUV HOLATI\n\n🆔 Sizning ID: {user_id}\nTashxis: {category}\nBirinchi tashrif sanasi: {registered_at}\nO'tgan kunlar: {days_passed}\nQolgan kunlar: {days_remaining}",
         "no_active_case": "Sizda faol tekshiruvlar yo'q. Boshlash uchun /start tugmasini bosing.",
-        "case_stopped": "✅ Eslatmalar to'xtatildi. Qayta boshlash uchun /start tugmasini bosing",
-        "expired_status": "⏰ MUDDAT TUGADI\n\n🆔 Sizning ID: {user_id}\nTashxis: {category}\nBirinchi tashrif sanasi: {registered_at}\n\nQo'shimcha tekshiruvlar muddati tugadi. Hujjatlaringiz migratsiya xizmatiga yuborildi.",
         
-        # Тексты напоминаний
-        "next_reminder_5": "Keyingi eslatma: 5-kun (qolgan {next_reminder} {day_word})",
-        "next_reminder_10": "Keyingi eslatma: 10-kun (qolgan {next_reminder} {day_word})",
-        "next_reminder_15": "Keyingi eslatma: 15-kun (qolgan {next_reminder} {day_word})",
-        "next_reminder_20": "Keyingi eslatma: 20-kun (qolgan {next_reminder} {day_word})",
-        "next_reminder_25": "Keyingi eslatma: 25-kun (qolgan {next_reminder} {day_word})",
-        "next_reminder_30": "Keyingi eslatma: 30-kun (qolgan {next_reminder} {day_word}) - YAKUNIY",
-        "all_reminders_sent": "Barcha eslatmalar yuborildi. Tekshiruv yakunlandi.",
+        # Финальные уведомления
+        
         
         # Сообщения об ошибках
         "error_occurred": "Xatolik yuz berdi. Iltimos, /start tugmasini bosing.",
         "choose_category": "Iltimos, taklif qilingan tugmalardan kategoriyani tanlang.",
+        "examination_reminder": "✅ Tanlov uchun rahmat! Endi siz ro'yxatdan o'tgan kundan boshlab 30 kun ichida tekshiruvdan o'tishingiz kerak.",
         "no_active_examinations": "Sizda faol tekshiruvlar yo'q.",
         "registration_status": "📊 RO'YXATDAN O'TISH HOLATI\n\n🆔 Sizning ID: {user_id}\nRo'yxatdan o'tish sanasi: {registered_at}\nRo'yxatdan o'tishdan beri kunlar: {days_since_registration}\n\nHozircha faol tekshiruvlaringiz yo'q. Boshlash uchun /start tugmasini bosing.",
         
         # Напоминания
-        "reminder_template": "⏰ ESLATMA!\n\nTashxis bo'yicha kuzatuv boshlanganidan {days} kun o'tdi: {category}\nMuddat tugashiga qolgan kunlar: {remaining}",
-        "final_reminder": (
-            "⚠️ DIQQAT!\n\n"
-            "Qo'shimcha tekshiruvlar muddati tugadi, hujjatlaringiz migratsiya xizmatiga yuborildi.\n\n"
-            "1 kundan keyin botga kirish cheklanadi."
-        ),
-        "bot_liquidation_message": (
-            "🚫 BOT LIQUIDATSIYASI\n\n"
-            "Qo'shimcha tekshiruvlar muddati to'liq tugadi.\n"
-            "Ma'lumotlaringiz migratsiya xizmatiga uzatildi.\n\n"
-            "Botga kirish cheklangan."
-        ),
         
         # Переводы типов действий
         "action_bot_started": "Bot ishga tushirildi",
@@ -283,7 +338,12 @@ TEXTS = {
         "action_data_drug_addiction": "Giynomaniya",
         "action_data_important_message": "Muhim xabar",
         "action_data_show_diagnosis_menu": "Sizda aniqlandi",
-        "action_data_show_help": "Yordam"
+        "action_data_show_help": "Yordam",
+        
+        # Напоминания
+        "regular_reminder": "⏰ Eslatma: {days_passed} o'tdi",
+        "final_reminder": "⚠️ EHTIYOT! Qo'shimcha tekshiruv muddati tugadi, hujjatlaringiz migratsiya xizmatiga taqdim etildi.",
+        "bot_liquidation_message": "🚫 Bot bilan ishlash muddati tugadi. Qo'shimcha tekshiruv muddati o'tdi."
     },
     
     "zh": {
@@ -297,13 +357,22 @@ TEXTS = {
         "consent": "要继续使用机器人，需要您同意处理个人数据。\n\n点击下面的按钮继续。",
         "consent_button": "✅ 同意",
         
+        # Выбор языка
+        "language_selection": "选择语言:",
+        "registration_info": """👤 用户ID: {user_id}
+📅 {registration_status}
+🕐 注册日期: {registration_date}
+
+选择语言:""",
+        
         # Важное сообщение
         "important_message": "⚠️ 重要消息\n\n您的信息已转交给俄罗斯消费者权益保护局。如果您不完成额外检查，您将收到关于在俄罗斯联邦不受欢迎居留的警告。不要拖延！您有一个月的时间！",
-        "understood_month": "✅ 明白，一月",
+        "understood_month": "✅ 明白",
+        "understood_examination": "✅ 明白",
         
         # Выбор диагноза
-        "diagnosis_found": "📋 您被诊断出\n选择您的按钮:",
-        "category_select": "选择类别:",
+        "diagnosis_found": "📋 您需要进行额外检查",
+        "category_select": "📋 您被诊断出疾病。请从列表中选择:",
         
         # Диагнозы
         "tuberculosis": "🫁 肺结核",
@@ -312,29 +381,76 @@ TEXTS = {
         "drug_addiction": "💊 吸毒成瘾",
         
         # Информация о диагнозах (упрощенная версия на китайском)
-        "tuberculosis_info": "🫁 肺结核\n\n肺结核是一种极其危险和传染性的疾病，可能导致死亡。它通过空气传播。",
-        "syphilis_info": "🧬 梅毒\n\n梅毒是一种通过性传播的危险传染病。可以治疗！",
-        "hiv_info": "🧫 艾滋病感染\n\n艾滋病感染是由人类免疫缺陷病毒引起的疾病。",
+        "tuberculosis_info": (
+            "🫁 肺结核\n\n"
+            "肺结核是一种危险且传染性的疾病，如果不治疗可能导致死亡。它通过空气传播，因此及时检查很重要。及时诊断（曼图试验、迪阿斯金试验、X光检查）可以完全治愈肺结核。请不要担心，请尽快携带我们的转诊单前往结核病防治所——GBUZ PKPTD，地址：符拉迪沃斯托克，4-я弗洛茨卡亚街37/39号。您有10天时间去看肺科医生。如有必要，医生可能会要求进行痰培养和胸部器官计算机断层扫描。"
+        ),
+        "syphilis_info": (
+            "🧬 梅毒\n\n"
+            "梅毒是一种危险传染病，主要通过性传播。它可以治疗，特别是及时就医时。请不要担心，请尽快携带我们的转诊单前往皮肤性病防治所——GBUZ KKVVD，地址：符拉迪沃斯托克市，加马尔尼卡街18V号。您有10天时间去看皮肤性病医生。"
+        ),
+        "hiv_info": (
+            "🧫 艾滋病感染\n\n"
+            "艾滋病感染是由人类免疫缺陷病毒（HIV）引起的疾病。这种病毒攻击并破坏免疫系统的细胞，这些细胞保护身体免受感染。\n\n"
+            "现代抗逆转录病毒疗法（ART）可以抑制病毒复制并显著延长患者生命。然而，在俄罗斯，由于法律原因，无法使用这些药物治疗。\n\n"
+            "如需咨询，请联系边疆区临床医院第2号，艾滋病和传染病预防控制中心，地址：符拉迪沃斯托克市，博里森科街50号。"
+        ),
         "drug_addiction_info": (
             "💊 吸毒成瘾\n\n"
-            "您的生物材料已送往地区戒毒所。请记住！阳性结果可能不会得到确认，"
-            "所以请不要担心，等待结果。如果结果呈阳性，您最好回家开始治疗，"
-            "您也可以联系位于斯塔纽科维奇53号的地区戒毒所来质疑结果。祝您好运！"
+            "您的生物材料已送往地区戒毒所。请记住：阳性结果可能不会得到确认，所以请不要担心——请等待最终结论。如果结果确实呈阳性，建议您回家开始治疗。您也可以联系地区戒毒所，地址：符拉迪沃斯托克市，斯塔纽科维奇街53号，以便在必要时质疑分析结果。祝您一切顺利，身体健康！"
         ),
         
         # Кнопки действий
         "documents_reminder": "📋 别忘了随身携带:\n• 护照\n• 移民卡\n• 签证\n• 登记",
-        "understood_10_days": "✅ 明白，10天",
-        "understood_10_days_examination": "明白，10天完成检查",
+        "understood_10_days": "✅ 明白",
+        "understood_10_days_examination": "明白，10天",
         "show_documents": "📋 文件",
-        "passed_examination": "✅ 完成",
+        "examination_question": "您是否完成了额外检查？",
+        "passed_examination": "✅ 是",
         "not_passed_examination": "❌ 没有",
         "waiting_certificate": "我们在有限责任公司MO«莲花»等待您，地址：符拉迪沃斯托克，斯特列尔科瓦亚街23A",
+        "examination_completed": "✅ 太好了！检查成功完成。",
+        "examination_required": "⚠️ 需要在10天内完成检查。",
+        "not_passed_message": "❌ 您没有完成检查。需要重新完成。",
+        
+        # Статусы регистрации
+        "already_registered": "您已经注册",
+        "just_registered": "您已注册",
+        "user_id": "用户ID",
+        "registration_date": "注册日期",
+        "diagnosis_date": "诊断选择日期",
+        "deadline_date": "截止日期",
+        "status": "状态",
+        "waiting_diagnosis": "等待选择诊断",
+        "choose_diagnosis": "请选择诊断以开始检查过程",
+        "click_for_status": "点击按钮查看状态：",
+        "click_for_help": "点击按钮查看帮助：",
+        "show_status": "📊 显示状态",
+        "show_help": "❓ 显示帮助",
+        
+        # Ошибки
+        "invalid_selection": "❌ 选择无效。请从提供的选项中选择一个。",
         
         # Кнопки меню
         "start_button": "🚀 开始",
         "status_button": "📊 状态",
         "help_button": "❓ 帮助",
+        "main_menu_text": "请选择操作:",
+        
+        # Команды бота
+        "start_command": "🆔 用户ID: {user_id}\n📅 注册日期: {registration_date}\n✅ {registration_status}\n⏰ 剩余天数: {days_left}\n\n🌍 选择语言:",
+        "status_command": "📊 注册状态",
+        "help_command": "❓ 命令帮助",
+        
+        # Описания команд для выпадающего меню
+        "start_cmd_desc": "🚀 打开菜单",
+        "status_cmd_desc": "📊 注册状态",
+        "help_cmd_desc": "❓ 机器人如何工作？",
+        
+        # Статусы времени
+        "days_left": "剩余天数: {days}",
+        "last_day": "最后一天！",
+        "overdue": "已逾期 {days} 天",
         
         # Описания команд для выпадающего меню
         "cmd_start_desc": "🚀 打开菜单",
@@ -342,47 +458,25 @@ TEXTS = {
         "cmd_help_desc": "❓ 机器人如何工作？",
         
         # Результат
-        "result_received": "✅ 已获得结果",
-        "result_received_message": "🎉 太好了！已获得结果。如果需要通过其他检查，请选择类别:",
         
         # Помощь
         "help": "❓ 帮助",
         "help_text": "📚 机器人帮助\n\n命令:\n/start - 开始使用机器人\n/status - 查看注册状态\n/help - 显示此帮助\n\n你有10天时间按指示前往，一个月内我们会发送委员会结果给你！",
         
         # Статус
-        "status_text": "📊 检查状态\n\n🆔 您的ID: {user_id}\n诊断: {category}\n首次访问日期: {registered_at}\n已过天数: {days_passed}\n剩余天数: {days_remaining}\n\n{next_reminder_text}",
         "no_active_case": "您没有活跃的检查。按/start开始。",
-        "case_stopped": "✅ 提醒已停止。要重新开始，请按/start",
-        "expired_status": "⏰ 期限已过\n\n🆔 您的ID: {user_id}\n诊断: {category}\n首次访问日期: {registered_at}\n\n额外检查期限已结束。您的文件已提交给移民服务。",
         
-        # Тексты напоминаний
-        "next_reminder_5": "下次提醒：第5天（{next_reminder} {day_word}后）",
-        "next_reminder_10": "下次提醒：第10天（{next_reminder} {day_word}后）",
-        "next_reminder_15": "下次提醒：第15天（{next_reminder} {day_word}后）",
-        "next_reminder_20": "下次提醒：第20天（{next_reminder} {day_word}后）",
-        "next_reminder_25": "下次提醒：第25天（{next_reminder} {day_word}后）",
-        "next_reminder_30": "下次提醒：第30天（{next_reminder} {day_word}后）- 最终",
-        "all_reminders_sent": "所有提醒已发送。检查已完成。",
+        # Финальные уведомления
+        
         
         # Сообщения об ошибках
         "error_occurred": "发生错误。请重新按/start。",
         "choose_category": "请从提供的按钮中选择类别。",
+        "examination_reminder": "✅ 感谢您的选择！现在您需要在注册之日起30天内接受检查。",
         "no_active_examinations": "您没有活跃的检查。",
         "registration_status": "📊 注册状态\n\n🆔 您的ID: {user_id}\n注册日期: {registered_at}\n注册后已过天数: {days_since_registration}\n\n您目前没有活跃的检查。请按/start开始。",
         
         # Напоминания
-        "reminder_template": "⏰ 提醒！\n\n诊断观察开始已过{days}天: {category}\n截止日期剩余天数: {remaining}",
-        "final_reminder": (
-            "⚠️ 注意！\n\n"
-            "额外检查期限已结束，您的文件已提交给移民局。\n\n"
-            "1天后机器人访问将受限。"
-        ),
-        "bot_liquidation_message": (
-            "🚫 机器人清算\n\n"
-            "额外检查期限完全结束。\n"
-            "您的数据已转交给移民局。\n\n"
-            "机器人访问受限。"
-        ),
         
         # Переводы типов действий
         "action_bot_started": "启动机器人",
@@ -403,7 +497,12 @@ TEXTS = {
         "action_data_drug_addiction": "吸毒成瘾",
         "action_data_important_message": "重要消息",
         "action_data_show_diagnosis_menu": "您被诊断出",
-        "action_data_show_help": "帮助"
+        "action_data_show_help": "帮助",
+        
+        # Напоминания
+        "regular_reminder": "⏰ 提醒：已过 {days_passed}",
+        "final_reminder": "⚠️ 注意！额外检查期限已结束，您的文件已提交给移民局。",
+        "bot_liquidation_message": "🚫 您的机器人访问已结束。额外检查期限已过期。"
     },
     
     "ko": {
@@ -417,13 +516,22 @@ TEXTS = {
         "consent": "봇 작업을 계속하려면 개인 데이터 처리에 대한 동의가 필요합니다.\n\n계속하려면 아래 버튼을 클릭하세요.",
         "consent_button": "✅ 동의",
         
+        # Выбор языка
+        "language_selection": "언어 선택:",
+        "registration_info": """👤 사용자 ID: {user_id}
+📅 {registration_status}
+🕐 등록 날짜: {registration_date}
+
+언어 선택:""",
+        
         # Важное сообщение
         "important_message": "⚠️ 중요한 메시지\n\n귀하에 대한 정보가 이미 로스포트레브나드조르에 전달되었습니다. 추가 검사를 받지 않으면 러시아 연방에서의 불원하는 체류에 대한 경고를 받게 됩니다. 서두르세요! 한 달이 있습니다!",
-        "understood_month": "✅ 이해, 한달",
+        "understood_month": "✅ 이해",
+        "understood_examination": "✅ 이해",
         
         # Выбор диагноза
-        "diagnosis_found": "📋 귀하에게 발견됨\n버튼을 선택하세요:",
-        "category_select": "카테고리 선택:",
+        "diagnosis_found": "📋 추가 검사가 필요합니다",
+        "category_select": "📋 귀하에게 질병이 발견되었습니다. 목록에서 선택해 주세요:",
         
         # Диагнозы
         "tuberculosis": "🫁 결핵",
@@ -432,31 +540,76 @@ TEXTS = {
         "drug_addiction": "💊 마약 중독",
         
         # Информация о диагнозах (упрощенная версия на корейском)
-        "tuberculosis_info": "🫁 결핵\n\n결핵은 극도로 위험하고 전염성이 강한 질병으로 사망을 초래할 수 있습니다. 공기로 전파됩니다.",
-        "syphilis_info": "🧬 매독\n\n매독은 성적으로 전파되는 위험한 전염병입니다. 치료 가능합니다!",
-        "hiv_info": "🧫 HIV 감염\n\nHIV 감염은 인간 면역결핍 바이러스에 의해 발생하는 질병입니다.",
+        "tuberculosis_info": (
+            "🫁 결핵\n\n"
+            "결핵은 치료하지 않으면 사망에 이를 수 있는 위험하고 전염성이 강한 질병입니다. 공기를 통해 전파되므로 적시에 검사를 받는 것이 중요합니다. 적시 진단(만투, 디아스킨 테스트, X선 검사)으로 결핵을 완전히 치료할 수 있습니다. 걱정하지 마시고 가능한 한 빨리 우리의 추천서를 가지고 결핵 예방 센터에 연락하세요 - GBUZ PKPTD 주소: 블라디보스토크, 4-ya 플로츠카야 거리 37/39. 폐과 의사를 방문할 10일의 시간이 있습니다. 필요시 의사는 가래 배양 검사와 흉부 기관의 컴퓨터 단층 촬영을 처방할 수 있습니다."
+        ),
+        "syphilis_info": (
+            "🧬 매독\n\n"
+            "매독은 주로 성적으로 전파되는 위험한 전염병입니다. 치료가 가능하며, 특히 적시에 의사를 방문할 때 더욱 그렇습니다. 걱정하지 마시고 가능한 한 빨리 우리의 추천서를 가지고 피부과 성병 진료소에 연락하세요 - GBUZ KKVVD, 주소: 블라디보스토크시, 가마르니카 거리 18V. 피부과 성병 의사를 방문할 10일의 시간이 있습니다."
+        ),
+        "hiv_info": (
+            "🧫 HIV 감염\n\n"
+            "HIV 감염은 인간 면역결핍 바이러스(HIV)에 의해 발생하는 질병입니다. 이 바이러스는 감염으로부터 신체를 보호하는 면역 시스템의 세포를 공격하고 파괴합니다.\n\n"
+            "현대 항레트로바이러스 요법(ART)은 바이러스 복제를 억제하고 환자의 생명을 크게 연장할 수 있습니다. 그러나 러시아에서는 법적 이유로 이러한 약물로 치료할 수 없습니다.\n\n"
+            "상담을 위해서는 지역 임상 병원 제2호, AIDS 및 전염병 예방 및 치료 센터에 연락하세요. 주소: 블라디보스토크시, 보리센코 거리 50."
+        ),
         "drug_addiction_info": (
             "💊 마약 중독\n\n"
-            "귀하의 생물학적 재료가 지역 마약학 진료소로 보내졌습니다. 기억하세요! "
-            "양성 결과가 확인되지 않을 수 있으므로 걱정하지 말고 결과를 기다리세요. "
-            "결과가 양성이라면 집으로 돌아가 치료를 시작하는 것이 좋으며, "
-            "결과에 이의를 제기하기 위해 스타뉴코비치 53번지에 있는 지역 마약학 진료소에 연락할 수 있습니다. "
-            "행운을 빕니다!"
+            "귀하의 생물학적 재료가 지역 마약학 진료소로 보내졌습니다. 기억하세요: 양성 결과가 확인되지 않을 수 있으므로 걱정하지 말고 최종 결론을 기다리세요. 결과가 정말로 양성이라면 집으로 돌아가 치료를 시작하는 것이 좋습니다. 또한 필요시 분석 결과에 이의를 제기하기 위해 지역 마약학 진료소에 연락할 수 있습니다. 주소: 블라디보스토크시, 스타뉴코비치 거리 53. 최선을 다하고 건강하시길 바랍니다!"
         ),
         
         # Кнопки действий
         "documents_reminder": "📋 가져가야 할 것들을 잊지 마세요:\n• 여권\n• 이민 카드\n• 비자\n• 등록",
-        "understood_10_days": "✅ 이해, 10일",
-        "understood_10_days_examination": "이해, 10일 검사 받기",
+        "understood_10_days": "✅ 이해",
+        "understood_10_days_examination": "이해, 10일",
         "show_documents": "📋 문서",
-        "passed_examination": "✅ 완료",
-        "not_passed_examination": "❌ 없음",
+        "examination_question": "추가 검사를 받으셨나요?",
+        "passed_examination": "✅ 예",
+        "not_passed_examination": "❌ 아니오",
         "waiting_certificate": "LLC MO «로토스»에서 증명서와 함께 귀하를 기다립니다. 주소: 블라디보스토크, 스트렐코바야 23A",
+        "examination_completed": "✅ 훌륭합니다! 검사가 성공적으로 완료되었습니다.",
+        "examination_required": "⚠️ 10일 내에 검사를 받아야 합니다.",
+        "not_passed_message": "❌ 검사를 받지 않았습니다. 다시 받아야 합니다.",
+        
+        # Статусы регистрации
+        "already_registered": "이미 등록되었습니다",
+        "just_registered": "등록되었습니다",
+        "user_id": "사용자 ID",
+        "registration_date": "등록 날짜",
+        "diagnosis_date": "진단 선택 날짜",
+        "deadline_date": "마감 날짜",
+        "status": "상태",
+        "waiting_diagnosis": "진단 선택 대기",
+        "choose_diagnosis": "검사 과정을 시작하려면 진단을 선택하세요",
+        "click_for_status": "상태를 보려면 버튼을 클릭하세요:",
+        "click_for_help": "도움말을 보려면 버튼을 클릭하세요:",
+        "show_status": "📊 상태 표시",
+        "show_help": "❓ 도움말 표시",
+        
+        # Ошибки
+        "invalid_selection": "❌ 잘못된 선택입니다. 제공된 옵션 중 하나를 선택해 주세요.",
         
         # Кнопки 메뉴
         "start_button": "🚀 시작",
         "status_button": "📊 상태",
         "help_button": "❓ 도움말",
+        "main_menu_text": "작업을 선택하세요:",
+        
+        # Команды бота
+        "start_command": "🆔 사용자 ID: {user_id}\n📅 등록 날짜: {registration_date}\n✅ {registration_status}\n⏰ 남은 일수: {days_left}\n\n🌍 언어를 선택하세요:",
+        "status_command": "📊 등록 상태",
+        "help_command": "❓ 명령어 도움말",
+        
+        # Описания команд для выпадающего меню
+        "start_cmd_desc": "🚀 메뉴 열기",
+        "status_cmd_desc": "📊 등록 상태",
+        "help_cmd_desc": "❓ 봇은 어떻게 작동하나요?",
+        
+        # Статусы времени
+        "days_left": "남은 일수: {days}",
+        "last_day": "마지막 날!",
+        "overdue": "기한 초과 {days}일",
         
         # Описания команд для выпадающего меню
         "cmd_start_desc": "🚀 메뉴 열기",
@@ -464,47 +617,25 @@ TEXTS = {
         "cmd_help_desc": "❓ 봇은 어떻게 작동하나요?",
         
         # Результат
-        "result_received": "✅ 결과 수신",
-        "result_received_message": "🎉 훌륭합니다! 결과를 받았습니다. 다른 검사가 필요하면 카테고리를 선택하세요:",
         
         # Помощь
         "help": "❓ 도움말",
         "help_text": "📚 봇 도움말\n\n명령어:\n/start - 봇 작업 시작\n/status - 등록 상태 확인\n/help - 이 도움말 표시\n\n지시에 따라 가기 위해 10일이 있으며, 한 달 안에 위원회 결과를 보내드릴 것입니다!",
         
         # Статус
-        "status_text": "📊 검사 상태\n\n🆔 귀하의 ID: {user_id}\n진단: {category}\n첫 방문 날짜: {registered_at}\n경과 일수: {days_passed}\n남은 일수: {days_remaining}\n\n{next_reminder_text}",
         "no_active_case": "활성 검사가 없습니다. 시작하려면 /start를 누르세요.",
-        "case_stopped": "✅ 알림이 중지되었습니다. 다시 시작하려면 /start를 누르세요",
-        "expired_status": "⏰ 기한 만료\n\n🆔 귀하의 ID: {user_id}\n진단: {category}\n첫 방문 날짜: {registered_at}\n\n추가 검사 기한이 종료되었습니다. 귀하의 서류가 이민 서비스에 제출되었습니다.",
         
-        # Тексты напоминаний
-        "next_reminder_5": "다음 알림: 5일차 ({next_reminder} {day_word} 후)",
-        "next_reminder_10": "다음 알림: 10일차 ({next_reminder} {day_word} 후)",
-        "next_reminder_15": "다음 알림: 15일차 ({next_reminder} {day_word} 후)",
-        "next_reminder_20": "다음 알림: 20일차 ({next_reminder} {day_word} 후)",
-        "next_reminder_25": "다음 알림: 25일차 ({next_reminder} {day_word} 후)",
-        "next_reminder_30": "다음 알림: 30일차 ({next_reminder} {day_word} 후) - 최종",
-        "all_reminders_sent": "모든 알림이 전송되었습니다. 검사가 완료되었습니다.",
+        # Финальные уведомления
+        
         
         # Сообщения об ошибках
         "error_occurred": "오류가 발생했습니다. 다시 /start를 누르세요.",
         "choose_category": "제공된 버튼에서 카테고리를 선택하세요.",
+        "examination_reminder": "✅ 선택해 주셔서 감사합니다! 이제 등록일로부터 30일 이내에 검사를 받으셔야 합니다.",
         "no_active_examinations": "활성 검사가 없습니다.",
         "registration_status": "📊 등록 상태\n\n🆔 귀하의 ID: {user_id}\n등록 날짜: {registered_at}\n등록 후 경과 일수: {days_since_registration}\n\n현재 활성 검사가 없습니다. 시작하려면 /start를 누르세요.",
         
         # Напоминания
-        "reminder_template": "⏰ 알림!\n\n진단 관찰 시작 후 {days}일 경과: {category}\n마감까지 남은 일수: {remaining}",
-        "final_reminder": (
-            "⚠️ 주의!\n\n"
-            "추가 검사 기간이 종료되었습니다. 귀하의 서류가 이민국에 제출되었습니다.\n\n"
-            "1일 후 봇 접근이 제한됩니다."
-        ),
-        "bot_liquidation_message": (
-            "🚫 봇 청산\n\n"
-            "추가 검사 기간이 완전히 종료되었습니다.\n"
-            "귀하의 데이터가 이민국에 전달되었습니다.\n\n"
-            "봇 접근이 제한되었습니다."
-        ),
         
         # Переводы типов действий
         "action_bot_started": "봇 시작",
@@ -525,7 +656,12 @@ TEXTS = {
         "action_data_drug_addiction": "마약 중독",
         "action_data_important_message": "중요한 메시지",
         "action_data_show_diagnosis_menu": "귀하에게 발견됨",
-        "action_data_show_help": "도움말"
+        "action_data_show_help": "도움말",
+        
+        # Напоминания
+        "regular_reminder": "⏰ 알림: {days_passed} 경과",
+        "final_reminder": "⚠️ 주의! 추가 검사 기한이 종료되었습니다. 귀하의 서류가 이민국에 제출되었습니다.",
+        "bot_liquidation_message": "🚫 귀하의 봇 액세스가 종료되었습니다. 추가 검사 기한이 만료되었습니다."
     },
     
     "en": {
@@ -539,13 +675,22 @@ TEXTS = {
         "consent": "To continue working with the bot, your consent to process personal data is required.\n\nClick the button below to continue.",
         "consent_button": "✅ Agree",
         
+        # Выбор языка
+        "language_selection": "Choose language:",
+        "registration_info": """👤 User ID: {user_id}
+📅 {registration_status}
+🕐 Registration date: {registration_date}
+
+Choose language:""",
+        
         # Важное сообщение
         "important_message": "⚠️ IMPORTANT MESSAGE\n\nInformation about you has already been transmitted to ROSPOTREBNADZOR. If you do not undergo additional examinations, you will receive a warning about UNWANTED stay in the Russian Federation. Don't delay! You have one month!",
-        "understood_month": "✅ Got it, month",
+        "understood_month": "✅ Got it",
+        "understood_examination": "✅ Got it",
         
         # Выбор диагноза
-        "diagnosis_found": "📋 YOU HAVE BEEN DIAGNOSED\nChoose your button:",
-        "category_select": "Choose category:",
+        "diagnosis_found": "📋 You need to undergo additional examination",
+        "category_select": "📋 You have been diagnosed with a disease. Please choose from the list:",
         
         # Диагнозы
         "tuberculosis": "🫁 Tuberculosis",
@@ -554,31 +699,76 @@ TEXTS = {
         "drug_addiction": "💊 Drug addiction",
         
         # Информация о диагнозах
-        "tuberculosis_info": "🫁 TUBERCULOSIS\n\nTuberculosis is an extremely dangerous and contagious disease that can lead to death. It is transmitted by airborne droplets. With timely diagnosis (Mantoux, Diaskin test, fluorography) it can be cured forever!",
-        "syphilis_info": "🧬 SYPHILIS\n\nSyphilis is a dangerous infectious disease transmitted sexually. It can be treated!",
-        "hiv_info": "🧫 HIV INFECTION\n\nHIV infection is a disease caused by the human immunodeficiency virus. The virus destroys immune cells that help the body cope with pathogenic microorganisms.",
+        "tuberculosis_info": (
+            "🫁 TUBERCULOSIS\n\n"
+            "Tuberculosis is a dangerous and contagious disease that can lead to death if left untreated. It is transmitted by airborne droplets, so it's important to get examined in time. With timely diagnosis (Mantoux, Diaskin test, fluorography) tuberculosis is completely curable. Don't worry and contact the Tuberculosis Dispensary with our referral as soon as possible - GBUZ PKPTD at: Vladivostok, 4-ya Flotskaya St, 37/39. You have 10 days to visit a phthisiatrician. If necessary, the doctor may prescribe sputum culture and computed tomography of the chest organs."
+        ),
+        "syphilis_info": (
+            "🧬 SYPHILIS\n\n"
+            "Syphilis is a dangerous infectious disease transmitted primarily through sexual contact. It can be treated, especially when seeking medical attention promptly. Don't worry and contact the Dermatovenerological Dispensary with our referral as soon as possible - GBUZ KKVVD, at: Vladivostok, Gamarnika St, 18V. You have 10 days to visit a dermatovenerologist."
+        ),
+        "hiv_info": (
+            "🧫 HIV INFECTION\n\n"
+            "HIV infection is a disease caused by the human immunodeficiency virus (HIV). This virus attacks and destroys cells of the immune system that protect the body from infections.\n\n"
+            "Modern antiretroviral therapy (ART) allows suppressing virus replication and significantly prolongs patients' lives. However, in Russia, treatment with these drugs is not available for legal reasons.\n\n"
+            "For consultation, contact the Regional Clinical Hospital No. 2, Center for Prevention and Control of AIDS and Infectious Diseases, at: Vladivostok, Bosisenko St, 50."
+        ),
         "drug_addiction_info": (
             "💊 DRUG ADDICTION\n\n"
-            "Your biological material has been sent to the Regional Narcological Dispensary. Remember! "
-            "A positive result may not be confirmed, so don't worry, wait for the result. "
-            "If the result turns out to be positive, it's better for you to go home and start treatment, "
-            "and you can also contact the Regional Narcological Dispensary at Stanjukovich 53 to challenge the result. "
-            "All the best!"
+            "Your biological material has been sent to the Regional Narcological Dispensary. Remember: a positive result may not be confirmed, so don't worry — wait for the final conclusion. If the result does turn out to be positive, it's recommended to go home and start treatment. You can also contact the Regional Narcological Dispensary at: Vladivostok, Stanyukovich St, 53, to challenge the analysis result if necessary. Wishing you all the best and good health!"
         ),
         
         # Кнопки действий
         "documents_reminder": "📋 Don't forget to bring with you:\n• passport\n• migration card\n• visa\n• registration",
-        "understood_10_days": "✅ Got it, 10 days",
-        "understood_10_days_examination": "Got it, 10 days examination",
+        "understood_10_days": "✅ Got it",
+        "understood_10_days_examination": "Got it, 10 days",
         "show_documents": "📋 Documents",
-        "passed_examination": "✅ Done",
+        "examination_question": "Have you completed the additional examination?",
+        "passed_examination": "✅ Yes",
         "not_passed_examination": "❌ No",
         "waiting_certificate": "We are waiting for you with a certificate at LLC MO «Lotos» at the address Vladivostok, Strelkovaya 23A",
+        "examination_completed": "✅ Excellent! Examination completed successfully.",
+        "examination_required": "⚠️ Need to undergo examination within 10 days.",
+        "not_passed_message": "❌ You did not pass the examination. Need to retake.",
+        
+        # Registration status
+        "already_registered": "You are already registered",
+        "just_registered": "You have registered",
+        "user_id": "User ID",
+        "registration_date": "Registration date",
+        "diagnosis_date": "Diagnosis selection date",
+        "deadline_date": "Deadline date",
+        "status": "Status",
+        "waiting_diagnosis": "Waiting for diagnosis selection",
+        "choose_diagnosis": "Choose diagnosis to start examination process",
+        "click_for_status": "Click button to view status:",
+        "click_for_help": "Click button to view help:",
+        "show_status": "📊 Show Status",
+        "show_help": "❓ Show Help",
+        
+        # Errors
+        "invalid_selection": "❌ Invalid selection. Please choose one of the provided options.",
         
         # Menu buttons
         "start_button": "🚀 Start",
         "status_button": "📊 Status",
         "help_button": "❓ Help",
+        "main_menu_text": "Choose action:",
+        
+        # Команды бота
+        "start_command": "🆔 User ID: {user_id}\n📅 Registration date: {registration_date}\n✅ {registration_status}\n⏰ Days left: {days_left}\n\n🌍 Choose language:",
+        "status_command": "📊 Registration status",
+        "help_command": "❓ Command help",
+        
+        # Описания команд для выпадающего меню
+        "start_cmd_desc": "🚀 Open menu",
+        "status_cmd_desc": "📊 Registration status",
+        "help_cmd_desc": "❓ How does the bot work?",
+        
+        # Time statuses
+        "days_left": "Days left: {days}",
+        "last_day": "Last day!",
+        "overdue": "Overdue by {days} days",
         
         # Command descriptions for dropdown menu
         "cmd_start_desc": "🚀 Open menu",
@@ -586,47 +776,25 @@ TEXTS = {
         "cmd_help_desc": "❓ How does the bot work?",
         
         # Result
-        "result_received": "✅ Result received",
-        "result_received_message": "🎉 Great! Result received. If you need to undergo another examination, choose a category:",
         
         # Помощь
         "help": "❓ Help",
         "help_text": "📚 BOT HELP\n\nCommands:\n/start - Start working with the bot\n/status - Find out registration status\n/help - Show this help\n\nYou have 10 days to go by referral, and within a month we will send you the commission results!",
         
         # Статус
-        "status_text": "📊 EXAMINATION STATUS\n\n🆔 Your ID: {user_id}\nDiagnosis: {category}\nFirst visit date: {registered_at}\nDays passed: {days_passed}\nDays remaining: {days_remaining}",
         "no_active_case": "You have no active examinations. Press /start to start.",
-        "case_stopped": "✅ Reminders stopped. To start again, press /start",
-        "expired_status": "⏰ DEADLINE EXPIRED\n\n🆔 Your ID: {user_id}\nDiagnosis: {category}\nFirst visit date: {registered_at}\n\nAdditional examination deadlines have ended. Your documents have been submitted to the migration service.",
         
-        # Тексты напоминаний
-        "next_reminder_5": "Next reminder: day 5 (in {next_reminder} {day_word})",
-        "next_reminder_10": "Next reminder: day 10 (in {next_reminder} {day_word})",
-        "next_reminder_15": "Next reminder: day 15 (in {next_reminder} {day_word})",
-        "next_reminder_20": "Next reminder: day 20 (in {next_reminder} {day_word})",
-        "next_reminder_25": "Next reminder: day 25 (in {next_reminder} {day_word})",
-        "next_reminder_30": "Next reminder: day 30 (in {next_reminder} {day_word}) - FINAL",
-        "all_reminders_sent": "All reminders sent. Examination completed.",
+        # Финальные уведомления
+        
         
         # Сообщения об ошибках
         "error_occurred": "An error occurred. Please press /start again.",
         "choose_category": "Please choose a category from the provided buttons.",
+        "examination_reminder": "✅ Thank you for your choice! Now you need to undergo an examination within 30 days from the registration date.",
         "no_active_examinations": "You have no active examinations.",
         "registration_status": "📊 REGISTRATION STATUS\n\n🆔 Your ID: {user_id}\nRegistration date: {registered_at}\nDays since registration: {days_since_registration}\n\nYou currently have no active examinations. Press /start to begin.",
         
         # Напоминания
-        "reminder_template": "⏰ REMINDER!\n\n{days} days have passed since the start of observation for diagnosis: {category}\nDays remaining until the deadline: {remaining}",
-        "final_reminder": (
-            "⚠️ ATTENTION!\n\n"
-            "Additional examination deadlines have expired, your documents have been submitted to the migration service.\n\n"
-            "Bot access will be restricted in 1 day."
-        ),
-        "bot_liquidation_message": (
-            "🚫 BOT LIQUIDATION\n\n"
-            "Additional examination deadlines have completely expired.\n"
-            "Your data has been transferred to the migration service.\n\n"
-            "Bot access is restricted."
-        ),
         
         # Переводы типов действий
         "action_bot_started": "Bot started",
@@ -647,7 +815,12 @@ TEXTS = {
         "action_data_drug_addiction": "Drug addiction",
         "action_data_important_message": "Important message",
         "action_data_show_diagnosis_menu": "You have been diagnosed",
-        "action_data_show_help": "Help"
+        "action_data_show_help": "Help",
+        
+        # Напоминания
+        "regular_reminder": "⏰ Reminder: {days_passed} have passed",
+        "final_reminder": "⚠️ ATTENTION! Additional examination period has ended, your documents have been submitted to the migration service.",
+        "bot_liquidation_message": "🚫 Your bot access has ended. Additional examination period has expired."
     }
 }
 
@@ -661,7 +834,7 @@ def get_text(language: str, key: str, **kwargs) -> str:
         # Если текста нет на выбранном языке, берем русский
         if key in TEXTS["ru"]:
             return TEXTS["ru"][key].format(**kwargs)
-        return f"Text not found: {key}"
+        return f"text not found: {key}"
     
     return TEXTS[language][key].format(**kwargs)
 
@@ -669,8 +842,6 @@ def get_text(language: str, key: str, **kwargs) -> str:
 CONSENT_TEXT = TEXTS["ru"]["consent"]
 CONSENT_BUTTON_TEXT = TEXTS["ru"]["consent_button"]
 CATEGORY_SELECT_TEXT = TEXTS["ru"]["category_select"]
-RESULT_RECEIVED_TEXT = TEXTS["ru"]["result_received"]
-RESULT_RECEIVED_MESSAGE = TEXTS["ru"]["result_received_message"]
 
 BUTTONS = {
     "Туберкулез": TEXTS["ru"]["tuberculosis"],
@@ -687,9 +858,5 @@ INFO_TEXTS = {
 }
 
 HELP_TEXT = TEXTS["ru"]["help_text"]
-STATUS_TEXT = TEXTS["ru"]["status_text"]
-NO_ACTIVE_CASE = TEXTS["ru"]["no_active_case"]
-CASE_STOPPED = TEXTS["ru"]["case_stopped"]
-REMINDER_TEMPLATE = TEXTS["ru"]["reminder_template"]
 FINAL_REMINDER = TEXTS["ru"]["final_reminder"]
 
