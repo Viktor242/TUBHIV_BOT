@@ -75,7 +75,7 @@ class TelegramBot:
         self.dp.message(CommandStart())(self.cmd_start)
         self.dp.message(Command("status"))(self.cmd_status)
         self.dp.message(Command("help"))(self.cmd_help)
-        # self.dp.message(Command("test_cycle"))(self.cmd_test_cycle)  # ТЕСТОВАЯ КОМАНДА - ЗАКОММЕНТИРОВАНА
+        self.dp.message(Command("test_cycle"))(self.cmd_test_cycle)  # ТЕСТОВАЯ КОМАНДА
         
         # Обработчики кнопок главного меню (для всех языков)
         
@@ -572,48 +572,48 @@ class TelegramBot:
             reply_markup=ReplyKeyboardRemove()
         )
     
-    # async def cmd_test_cycle(self, message: types.Message, state: FSMContext):
-    #     """Тестирует цикл уведомлений (5–10–15–20–25–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
-    #     user_id = message.from_user.id
-    #     await message.answer("✅ Тест запущен: уведомления будут каждые 10 секунд")
-    #
-    #     from scheduler import send_test_reminder, block_test_user
-    #     
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=10),
-    #         args=[user_id, 5],
-    #         id=f"rem_5_{user_id}", replace_existing=True)
-    #
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=20),
-    #         args=[user_id, 10],
-    #         id=f"rem_10_{user_id}", replace_existing=True)
-    #
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=30),
-    #         args=[user_id, 15],
-    #         id=f"rem_15_{user_id}", replace_existing=True)
-    #
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=40),
-    #         args=[user_id, 20],
-    #         id=f"rem_20_{user_id}", replace_existing=True)
-    #
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=50),
-    #         args=[user_id, 25],
-    #         id=f"rem_25_{user_id}", replace_existing=True)
-    #
-    #     self.scheduler.add_job(send_test_reminder, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=60),
-    #         args=[user_id, 30],
-    #         id=f"rem_30_{user_id}", replace_existing=True)
-    #
-    #     # 🔥 31-й день → через 70 секунд (для теста)
-    #     self.scheduler.add_job(block_test_user, "date",
-    #         run_date=datetime.now(TZ) + timedelta(seconds=70),
-    #         args=[user_id],
-    #         id=f"block_{user_id}", replace_existing=True)
+    async def cmd_test_cycle(self, message: types.Message, state: FSMContext):
+        """Тестирует цикл уведомлений (5–10–15–20–25–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
+        user_id = message.from_user.id
+        await message.answer("✅ Тест запущен: уведомления будут каждые 10 секунд")
+
+        from scheduler import send_test_reminder, block_test_user
+        
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=10),
+            args=[user_id, 5],
+            id=f"rem_5_{user_id}", replace_existing=True)
+
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=20),
+            args=[user_id, 10],
+            id=f"rem_10_{user_id}", replace_existing=True)
+
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=30),
+            args=[user_id, 15],
+            id=f"rem_15_{user_id}", replace_existing=True)
+
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=40),
+            args=[user_id, 20],
+            id=f"rem_20_{user_id}", replace_existing=True)
+
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=50),
+            args=[user_id, 25],
+            id=f"rem_25_{user_id}", replace_existing=True)
+
+        self.scheduler.add_job(send_test_reminder, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=60),
+            args=[user_id, 30],
+            id=f"rem_30_{user_id}", replace_existing=True)
+
+        # 🔥 31-й день → через 70 секунд (для теста)
+        self.scheduler.add_job(block_test_user, "date",
+            run_date=datetime.now(TZ) + timedelta(seconds=70),
+            args=[user_id],
+            id=f"block_{user_id}", replace_existing=True)
     
     # Тестовые функции
     async def send_reminder(self, user_id: int, day: int):
