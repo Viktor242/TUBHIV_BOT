@@ -38,12 +38,9 @@ class User(Base):
     deadline = Column(DateTime, nullable=True)
     
     # Отметки о отправленных уведомлениях
-    reminder_5h = Column(Boolean, default=False)  # Напоминание через 5 часов (только для русских)
-    reminder_5d = Column(Boolean, default=False)  # Напоминание через 5 дней
+    reminder_1m = Column(Boolean, default=False)  # Напоминание через 1 минуту
     reminder_10d = Column(Boolean, default=False) # Напоминание через 10 дней
-    reminder_15d = Column(Boolean, default=False) # Напоминание через 15 дней
     reminder_20d = Column(Boolean, default=False) # Напоминание через 20 дней
-    reminder_25d = Column(Boolean, default=False) # Напоминание через 25 дней
     reminder_30d = Column(Boolean, default=False) # Финальное напоминание через 30 дней
 
     activity = relationship("Activity", back_populates="user", cascade="all, delete-orphan")

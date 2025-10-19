@@ -441,11 +441,23 @@ class ButtonHandler:
         else:
             days_remaining = 30  # Если дедлайн не установлен, показываем 30 дней
         
+        # Правильно обрабатываем время регистрации с часовым поясом
+        if user.created_at:
+            if user.created_at.tzinfo is None:
+                # Если время без часового пояса, считаем его локальным временем Владивостока
+                registration_time = user.created_at.strftime('%d.%m.%Y %H:%M')
+            else:
+                # Конвертируем в локальное время Владивостока
+                local_time = user.created_at.astimezone(TZ)
+                registration_time = local_time.strftime('%d.%m.%Y %H:%M')
+        else:
+            registration_time = datetime.now(TZ).strftime('%d.%m.%Y %H:%M')
+        
         # Красивое сообщение со статусом пользователя
         from texts import get_text
         status_message = (
             f"🆔 {get_text(language, 'user_id')}: {user.tg_id}\n"
-            f"📅 {get_text(language, 'registration_date')}: {user.created_at.strftime('%d.%m.%Y %H:%M')}\n"
+            f"📅 {get_text(language, 'registration_date')}: {registration_time}\n"
             f"✅ {get_text(language, 'already_registered')}\n"
             f"⏰ {get_text(language, 'days_left', days=days_remaining)}"
         )
@@ -461,13 +473,24 @@ class ButtonHandler:
         from aiogram.types import ReplyKeyboardRemove
         TZ = pytz.timezone("Asia/Vladivostok")
         
-        # Дата регистрации в боте
-        registration_date = user.created_at.strftime("%d.%m.%Y %H:%M")
+        # Правильно обрабатываем время регистрации с часовым поясом
+        if user.created_at:
+            if user.created_at.tzinfo is None:
+                registration_date = user.created_at.strftime("%d.%m.%Y %H:%M")
+            else:
+                local_time = user.created_at.astimezone(TZ)
+                registration_date = local_time.strftime("%d.%m.%Y %H:%M")
+        else:
+            registration_date = datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
         
         # Проверяем есть ли информация о диагнозе
         if activity.action_type == "Выбор диагноза" and activity.deadline_at:
-            # Дата выбора диагноза
-            diagnosis_date = activity.timestamp.strftime("%d.%m.%Y %H:%M")
+            # Дата выбора диагноза (правильно обрабатываем часовой пояс)
+            if activity.timestamp.tzinfo is None:
+                diagnosis_date = activity.timestamp.strftime("%d.%m.%Y %H:%M")
+            else:
+                local_time = activity.timestamp.astimezone(TZ)
+                diagnosis_date = local_time.strftime("%d.%m.%Y %H:%M")
             
             # Срок окончания (30 дней с выбора диагноза)
             deadline_date = activity.deadline_at.strftime("%d.%m.%Y")

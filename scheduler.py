@@ -75,8 +75,8 @@ async def check_reminders(bot):
                 reg = user.created_at.replace(tzinfo=TZ)
                 days_passed = (now.date() - reg.date()).days
                 
-                # Напоминания отправляем на 5, 10, 15, 20, 25, 30 дни
-                reminder_days = [5, 10, 15, 20, 25, 30]
+                # Напоминания отправляем на 1 минута, 10, 20, 30 дни
+                reminder_days = [10, 20, 30]
                 
                 for rd in reminder_days:
                     if days_passed >= rd:
@@ -175,7 +175,7 @@ async def cleanup_users_after_31_days(bot):
 # ====== 🔔 РАБОЧИЕ ФУНКЦИИ НАПОМИНАНИЙ ======
 
 async def send_regular_reminder(user_id: int, day: int):
-    """Отправляет обычное напоминание (через 5 часов, 5, 10, 15, 20, 25 дней)"""
+    """Отправляет обычное напоминание (через 1 минуту, 10, 20, 30 дней)"""
     try:
         # Получаем язык пользователя
         async with async_session_maker() as session:
@@ -187,22 +187,17 @@ async def send_regular_reminder(user_id: int, day: int):
             
             language = user.language
             
-            # Если day = 0, это напоминание через 5 часов (только для русского)
+            # Если day = 0, это напоминание через 1 минуту (для всех языков)
             if day == 0:
-                if language == "ru":
-                    text = get_text(language, "regular_reminder", days_passed="5 часов")
-                    await bot.send_message(chat_id=user_id, text=text)
-                    logger.info(f"✅ Напоминание через 5 часов отправлено пользователю {user_id} (русский)")
-                    
-                    # Записываем в activity и отмечаем в users
-                    from database_manager import DatabaseManager
-                    db_manager = DatabaseManager()
-                    await db_manager.log_reminder_sent(user_id, 0)
-                    await db_manager.mark_reminder_sent(user_id, "5h")
-                else:
-                    # Для других языков не отправляем напоминание через 5 часов
-                    logger.info(f"⏭️ Напоминание через 5 часов пропущено для пользователя {user_id} (язык: {language})")
-                    return
+                text = get_text(language, "regular_reminder", days_passed="1 минута")
+                await bot.send_message(chat_id=user_id, text=text)
+                logger.info(f"✅ Напоминание через 1 минуту отправлено пользователю {user_id} (язык: {language})")
+                
+                # Записываем в activity и отмечаем в users
+                from database_manager import DatabaseManager
+                db_manager = DatabaseManager()
+                await db_manager.log_reminder_sent(user_id, 0)
+                await db_manager.mark_reminder_sent(user_id, "1m")
             else:
                 text = get_text(language, "regular_reminder", days_passed=day)
                 await bot.send_message(chat_id=user_id, text=text)

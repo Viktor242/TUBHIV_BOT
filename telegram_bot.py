@@ -6,6 +6,7 @@
 
 import logging
 import asyncio
+from aiohttp import web
 from datetime import datetime, timedelta
 import threading
 from aiohttp import web
@@ -264,7 +265,17 @@ class TelegramBot:
         user = await self.db_manager.get_user_by_tg_id(user_id)
         
         if user:
-            registration_date = user.created_at.strftime("%d.%m.%Y %H:%M") if user.created_at else datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
+            # Правильно обрабатываем время с часовым поясом
+            if user.created_at:
+                if user.created_at.tzinfo is None:
+                    # Если время без часового пояса, считаем его локальным временем Владивостока
+                    registration_date = user.created_at.strftime("%d.%m.%Y %H:%M")
+                else:
+                    # Конвертируем в локальное время Владивостока
+                    local_time = user.created_at.astimezone(TZ)
+                    registration_date = local_time.strftime("%d.%m.%Y %H:%M")
+            else:
+                registration_date = datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
             registration_status = "Вы зарегистрированы" if is_new_user else "Вы уже зарегистрированы"
             
             # Вычисляем реальное количество дней до дедлайна
@@ -345,7 +356,16 @@ class TelegramBot:
             registration_status = get_text(language, "already_registered")
         
         # Формируем сообщение с информацией о регистрации
-        registration_date = user.created_at.strftime("%d.%m.%Y %H:%M")
+        if user.created_at:
+            if user.created_at.tzinfo is None:
+                # Если время без часового пояса, считаем его локальным временем Владивостока
+                registration_date = user.created_at.strftime("%d.%m.%Y %H:%M")
+            else:
+                # Конвертируем в локальное время Владивостока
+                local_time = user.created_at.astimezone(TZ)
+                registration_date = local_time.strftime("%d.%m.%Y %H:%M")
+        else:
+            registration_date = datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
         
         # Проверяем что user_id не None
         user_id = user.tg_id if user.tg_id is not None else "Неизвестно"
@@ -575,45 +595,39 @@ class TelegramBot:
         )
     
     async def cmd_test_cycle(self, message: types.Message, state: FSMContext):
-        """Тестирует цикл уведомлений (5–10–15–20–25–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
+        """Тестирует цикл уведомлений (1 минута–10–20–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
         user_id = message.from_user.id
         await message.answer("✅ Тест запущен: уведомления будут каждые 10 секунд")
 
         from scheduler import send_test_reminder, block_test_user
         
+        # 1 минута → через 10 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
             run_date=datetime.now(TZ) + timedelta(seconds=10),
-            args=[user_id, 5],
-            id=f"rem_5_{user_id}", replace_existing=True)
+            args=[user_id, 0],
+            id=f"rem_1m_{user_id}", replace_existing=True)
 
+        # 10 дней → через 20 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
             run_date=datetime.now(TZ) + timedelta(seconds=20),
             args=[user_id, 10],
             id=f"rem_10_{user_id}", replace_existing=True)
 
+        # 20 дней → через 30 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
             run_date=datetime.now(TZ) + timedelta(seconds=30),
-            args=[user_id, 15],
-            id=f"rem_15_{user_id}", replace_existing=True)
-
-        self.scheduler.add_job(send_test_reminder, "date",
-            run_date=datetime.now(TZ) + timedelta(seconds=40),
             args=[user_id, 20],
             id=f"rem_20_{user_id}", replace_existing=True)
 
+        # 30 дней → через 40 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
-            run_date=datetime.now(TZ) + timedelta(seconds=50),
-            args=[user_id, 25],
-            id=f"rem_25_{user_id}", replace_existing=True)
-
-        self.scheduler.add_job(send_test_reminder, "date",
-            run_date=datetime.now(TZ) + timedelta(seconds=60),
+            run_date=datetime.now(TZ) + timedelta(seconds=40),
             args=[user_id, 30],
             id=f"rem_30_{user_id}", replace_existing=True)
 
-        # 🔥 31-й день → через 70 секунд (для теста)
+        # 🔥 31-й день → через 50 секунд (для теста)
         self.scheduler.add_job(block_test_user, "date",
-            run_date=datetime.now(TZ) + timedelta(seconds=70),
+            run_date=datetime.now(TZ) + timedelta(seconds=50),
             args=[user_id],
             id=f"block_{user_id}", replace_existing=True)
     
@@ -678,34 +692,42 @@ class TelegramBot:
             await self.bot.session.close()
 
 async def handle(request):
-    """Простой ответ для проверки Render, что бот активен"""
+    """Ответ для проверки Render/Docker, что бот активен"""
     return web.Response(text="✅ Bot is alive and running")
 
 def start_keepalive_server():
-    """Запускает keep-alive сервер для Render"""
-    import os
-    port = int(os.environ.get("PORT", 8080))  # Render задает порт через переменную PORT
+    """Keep-alive сервер (Render / Docker Healthcheck)"""
+    port = int(os.environ.get("PORT", 8080))
     app = web.Application()
     app.router.add_get("/", handle)
     web.run_app(app, host="0.0.0.0", port=port)
 
 
 def main():
-    """Главная функция"""
+    """Главная функция запуска Telegram-бота"""
+    from telegram_bot import TelegramBot  # убедись, что импорт внизу, иначе круговой импорт
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
-    
+
     bot = TelegramBot()
-    
+
     try:
         asyncio.run(bot.start_polling())
     except KeyboardInterrupt:
-        logger.info("Бот остановлен пользователем")
+        logging.info("🛑 Бот остановлен пользователем")
     except Exception as e:
-        logger.error(f"Критическая ошибка: {e}")
+        logging.error(f"❌ Критическая ошибка: {e}")
+
 
 if __name__ == "__main__":
-    threading.Thread(target=start_keepalive_server, daemon=True).start()
-    main()
+    mode = os.getenv("START_MODE", "local").lower()
+
+    if mode in ("render", "docker"):
+        threading.Thread(target=start_keepalive_server, daemon=True).start()
+        logging.info(f"🌐 Keep-alive сервер запущен (режим: {mode})")
+        main()
+    else:
+        logging.info("💻 Запуск в локальном режиме (без keep-alive)")
+        main()

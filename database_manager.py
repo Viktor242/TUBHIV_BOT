@@ -110,19 +110,18 @@ class DatabaseManager:
                 # Создаем задачи планировщика для напоминаний
                 from scheduler import scheduler, send_regular_reminder, send_final_reminder, block_user_final
                 
-                # Первое напоминание через 5 часов (только для русских пользователей)
-                if user.language == "ru":
-                    scheduler.add_job(
-                        send_regular_reminder,
-                        "date",
-                        run_date=datetime.now(TZ) + timedelta(hours=5),
-                        args=[user.tg_id, 0],  # 0 означает "через несколько часов"
-                        id=f"reminder_5h_{user.tg_id}",
-                        replace_existing=True
-                    )
+                # Первое напоминание через 1 минуту (для всех пользователей)
+                scheduler.add_job(
+                    send_regular_reminder,
+                    "date",
+                    run_date=datetime.now(TZ) + timedelta(minutes=1),
+                    args=[user.tg_id, 0],  # 0 означает "через 1 минуту"
+                    id=f"reminder_1m_{user.tg_id}",
+                    replace_existing=True
+                )
                 
-                # Напоминания на 5, 10, 15, 20, 25 дней
-                reminder_days = [5, 10, 15, 20, 25]
+                # Напоминания на 10, 20 дней
+                reminder_days = [10, 20]
                 for day in reminder_days:
                     scheduler.add_job(
                         send_regular_reminder,
@@ -210,24 +209,23 @@ class DatabaseManager:
         """Отмечает отправленное уведомление в таблице users"""
         async with self.session_maker() as session:
             try:
-                user = await self.get_user_by_tg_id(user_tg_id)
+                # Получаем пользователя в той же сессии
+                result = await session.execute(
+                    select(User).where(User.tg_id == user_tg_id)
+                )
+                user = result.scalar_one_or_none()
+                
                 if not user:
                     logger.error(f"❌ Пользователь {user_tg_id} не найден для отметки напоминания")
                     return False
                 
                 # Устанавливаем соответствующее поле в True
-                if reminder_type == "5h":
-                    user.reminder_5h = True
-                elif reminder_type == "5d":
-                    user.reminder_5d = True
+                if reminder_type == "1m":
+                    user.reminder_1m = True
                 elif reminder_type == "10d":
                     user.reminder_10d = True
-                elif reminder_type == "15d":
-                    user.reminder_15d = True
                 elif reminder_type == "20d":
                     user.reminder_20d = True
-                elif reminder_type == "25d":
-                    user.reminder_25d = True
                 elif reminder_type == "30d":
                     user.reminder_30d = True
                 else:
