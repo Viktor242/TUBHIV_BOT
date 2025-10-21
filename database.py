@@ -38,7 +38,8 @@ class User(Base):
     deadline = Column(DateTime, nullable=True)
     
     # Отметки о отправленных уведомлениях
-    reminder_1m = Column(Boolean, default=False)  # Напоминание через 1 минуту
+    reminder_1m = Column(Boolean, default=False)    # Напоминание через 1 минуту
+    reminder_5h = Column(Boolean, default=False)    # Напоминание через 5 часов
     reminder_10d = Column(Boolean, default=False) # Напоминание через 10 дней
     reminder_20d = Column(Boolean, default=False) # Напоминание через 20 дней
     reminder_30d = Column(Boolean, default=False) # Финальное напоминание через 30 дней

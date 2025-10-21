@@ -152,7 +152,7 @@ TEXTS = {
         "no_active_case": "У тебя нет активных обследований. Нажми /start, чтобы начать.",
         
         # Напоминания
-        "regular_reminder": "⏰ Напоминание: прошло {days_passed}",
+        "regular_reminder": "⏰ Напоминание: {days_passed}",
         "final_reminder": "⚠️ ВНИМАНИЕ! Сроки по дообследованию закончены, Ваши документы поданы в миграционную службу.",
         "bot_liquidation_message": "🚫 Ваш доступ к боту завершен. Сроки по дообследованию истекли.",
         
@@ -341,7 +341,7 @@ Tilni tanlang:""",
         "action_data_show_help": "Yordam",
         
         # Напоминания
-        "regular_reminder": "⏰ Eslatma: {days_passed} o'tdi",
+        "regular_reminder": "⏰ Eslatma: {days_passed}",
         "final_reminder": "⚠️ EHTIYOT! Qo'shimcha tekshiruv muddati tugadi, hujjatlaringiz migratsiya xizmatiga taqdim etildi.",
         "bot_liquidation_message": "🚫 Bot bilan ishlash muddati tugadi. Qo'shimcha tekshiruv muddati o'tdi."
     },
@@ -500,7 +500,7 @@ Tilni tanlang:""",
         "action_data_show_help": "帮助",
         
         # Напоминания
-        "regular_reminder": "⏰ 提醒：已过 {days_passed}",
+        "regular_reminder": "⏰ 提醒：{days_passed}",
         "final_reminder": "⚠️ 注意！额外检查期限已结束，您的文件已提交给移民局。",
         "bot_liquidation_message": "🚫 您的机器人访问已结束。额外检查期限已过期。"
     },
@@ -659,7 +659,7 @@ Tilni tanlang:""",
         "action_data_show_help": "도움말",
         
         # Напоминания
-        "regular_reminder": "⏰ 알림: {days_passed} 경과",
+        "regular_reminder": "⏰ 알림: {days_passed}",
         "final_reminder": "⚠️ 주의! 추가 검사 기한이 종료되었습니다. 귀하의 서류가 이민국에 제출되었습니다.",
         "bot_liquidation_message": "🚫 귀하의 봇 액세스가 종료되었습니다. 추가 검사 기한이 만료되었습니다."
     },
@@ -818,7 +818,7 @@ Choose language:""",
         "action_data_show_help": "Help",
         
         # Напоминания
-        "regular_reminder": "⏰ Reminder: {days_passed} have passed",
+        "regular_reminder": "⏰ Reminder: {days_passed}",
         "final_reminder": "⚠️ ATTENTION! Additional examination period has ended, your documents have been submitted to the migration service.",
         "bot_liquidation_message": "🚫 Your bot access has ended. Additional examination period has expired."
     }

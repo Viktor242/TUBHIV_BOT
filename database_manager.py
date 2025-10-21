@@ -115,8 +115,18 @@ class DatabaseManager:
                     send_regular_reminder,
                     "date",
                     run_date=datetime.now(TZ) + timedelta(minutes=1),
-                    args=[user.tg_id, 0],  # 0 означает "через 1 минуту"
+                    args=[user.tg_id, -1],  # -1 означает "через 1 минуту"
                     id=f"reminder_1m_{user.tg_id}",
+                    replace_existing=True
+                )
+                
+                # Напоминание через 5 часов (для всех пользователей)
+                scheduler.add_job(
+                    send_regular_reminder,
+                    "date",
+                    run_date=datetime.now(TZ) + timedelta(hours=5),
+                    args=[user.tg_id, 0],  # 0 означает "через 5 часов"
+                    id=f"reminder_5h_{user.tg_id}",
                     replace_existing=True
                 )
                 
@@ -179,7 +189,9 @@ class DatabaseManager:
                     return False
                 
                 # Определяем тип напоминания
-                if reminder_day == 0:
+                if reminder_day == -1:  # -1 означает "через 1 минуту"
+                    action_data = "1 минута"
+                elif reminder_day == 0:
                     action_data = "5 часов"
                 elif reminder_day == 30:
                     action_data = "30 дней (финальное)"
@@ -222,6 +234,8 @@ class DatabaseManager:
                 # Устанавливаем соответствующее поле в True
                 if reminder_type == "1m":
                     user.reminder_1m = True
+                elif reminder_type == "5h":
+                    user.reminder_5h = True
                 elif reminder_type == "10d":
                     user.reminder_10d = True
                 elif reminder_type == "20d":

@@ -276,7 +276,7 @@ class TelegramBot:
                     registration_date = local_time.strftime("%d.%m.%Y %H:%M")
             else:
                 registration_date = datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
-            registration_status = "Вы зарегистрированы" if is_new_user else "Вы уже зарегистрированы"
+            registration_status = "Вы зарегистрированы" if is_new_user else "Добро пожаловать обратно!"
             
             # Вычисляем реальное количество дней до дедлайна
             if user.deadline:
@@ -595,17 +595,17 @@ class TelegramBot:
         )
     
     async def cmd_test_cycle(self, message: types.Message, state: FSMContext):
-        """Тестирует цикл уведомлений (1 минута–10–20–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
+        """Тестирует цикл уведомлений (5 часов–10–20–30–31 день) - ТЕСТОВАЯ ФУНКЦИЯ"""
         user_id = message.from_user.id
         await message.answer("✅ Тест запущен: уведомления будут каждые 10 секунд")
 
         from scheduler import send_test_reminder, block_test_user
         
-        # 1 минута → через 10 секунд (для теста)
+        # 5 часов → через 10 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
             run_date=datetime.now(TZ) + timedelta(seconds=10),
             args=[user_id, 0],
-            id=f"rem_1m_{user_id}", replace_existing=True)
+            id=f"rem_5h_{user_id}", replace_existing=True)
 
         # 10 дней → через 20 секунд (для теста)
         self.scheduler.add_job(send_test_reminder, "date",
@@ -643,29 +643,6 @@ class TelegramBot:
         except Exception as e:
             logger.error(f"Ошибка при отправке напоминания пользователю {user_id}: {e}")
 
-    async def block_user_after_31_days(self, user_id: int):
-        """Блокирует пользователя (тест)"""
-        async with self.db_manager.session_maker() as session:
-            from sqlalchemy import select
-            from database import User
-            
-            result = await session.execute(select(User).where(User.tg_id == user_id))
-            user = result.scalar_one_or_none()
-            if not user:
-                return
-
-            user.blocked = True
-            await session.commit()
-
-        try:
-            await self.bot.send_message(
-                chat_id=user_id,
-                text="⛔️ (ТЕСТ) Доступ к боту закрыт. Прошло 31 день."
-            )
-            logger.info(f"🚫 Пользователь {user_id} заблокирован (тестовый режим)")
-        except Exception as e:
-            logger.error(f"Ошибка при блокировке пользователя {user_id}: {e}")
-    
     # Обработчики кнопок
     
     
@@ -702,6 +679,34 @@ def start_keepalive_server():
     app.router.add_get("/", handle)
     web.run_app(app, host="0.0.0.0", port=port)
 
+def start_keepalive_server_sync():
+    """Синхронная версия keep-alive сервера для запуска в потоке"""
+    import threading
+    import time
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    
+    class HealthCheckHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == '/':
+                self.send_response(200)
+                self.send_header('Content-type', 'text/plain')
+                self.end_headers()
+                self.wfile.write(b'Bot is alive and running')
+            else:
+                self.send_response(404)
+                self.end_headers()
+        
+        def log_message(self, format, *args):
+            pass  # Отключаем логирование
+    
+    port = int(os.environ.get("PORT", 8080))
+    server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
+    
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        server.shutdown()
+
 
 def main():
     """Главная функция запуска Telegram-бота"""
@@ -725,9 +730,10 @@ if __name__ == "__main__":
     mode = os.getenv("START_MODE", "local").lower()
 
     if mode in ("render", "docker"):
-        threading.Thread(target=start_keepalive_server, daemon=True).start()
+        # Запускаем keep-alive сервер в отдельном потоке без asyncio
+        threading.Thread(target=start_keepalive_server_sync, daemon=True).start()
         logging.info(f"🌐 Keep-alive сервер запущен (режим: {mode})")
-        main()
     else:
-        logging.info("💻 Запуск в локальном режиме (без keep-alive)")
-        main()
+        logging.info("🚀 Запуск в локальном режиме (без keep-alive)")
+
+    main()
