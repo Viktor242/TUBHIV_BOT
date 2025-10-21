@@ -11,8 +11,9 @@ from sqlalchemy import select
 from database import async_session_maker, User, Activity
 from texts import get_text, TEXTS
 
+from constants import TZ
+
 logger = logging.getLogger(__name__)
-TZ = pytz.timezone("Asia/Vladivostok")
 
 class DatabaseManager:
     """Класс для управления операциями с базой данных"""

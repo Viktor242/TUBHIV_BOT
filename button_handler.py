@@ -352,8 +352,7 @@ class ButtonHandler:
                 deadline_date = activity_data.deadline_at.strftime("%d.%m.%Y")
                 
                 # Сколько дней осталось
-                import pytz
-                TZ = pytz.timezone("Asia/Vladivostok")
+                from constants import TZ
                 now_tz = datetime.now(TZ)
                 days_left = (activity_data.deadline_at - now_tz).days
                 
@@ -424,7 +423,7 @@ class ButtonHandler:
         import pytz
         
         # Вычисляем дни до дедлайна
-        TZ = pytz.timezone("Asia/Vladivostok")
+        from constants import TZ
         now = datetime.now(TZ)
         
         if user.deadline:
@@ -471,7 +470,7 @@ class ButtonHandler:
         
         language = user.language
         from aiogram.types import ReplyKeyboardRemove
-        TZ = pytz.timezone("Asia/Vladivostok")
+        from constants import TZ
         
         # Правильно обрабатываем время регистрации с часовым поясом
         if user.created_at:

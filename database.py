@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TZ = pytz.timezone("Asia/Vladivostok")
+from constants import TZ
 
 def get_vladivostok_time():
     return datetime.now(TZ)

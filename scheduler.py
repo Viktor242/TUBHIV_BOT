@@ -12,7 +12,7 @@ from database import async_session_maker, User, Activity
 from texts import get_text
 from sqlalchemy import update
 
-TZ = pytz.timezone("Asia/Vladivostok")
+from constants import TZ
 DAILY_REMINDER_HOUR = 9
 DAILY_REMINDER_MINUTE = 30
 

@@ -26,12 +26,11 @@ from states import RegistrationStates, DiagnosisStates
 from scheduler import setup_scheduler
 import pytz
 
-TZ = pytz.timezone("Asia/Vladivostok")
-
 logger = logging.getLogger(__name__)
 
+from constants import TZ
+
 class TelegramBot:
-    """Основной класс Telegram бота"""
     
     def __init__(self):
         load_dotenv()

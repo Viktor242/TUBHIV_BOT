@@ -13,7 +13,7 @@ from database import async_session_maker, User, UserAction
 from texts import TEXTS, get_text
 
 # Настройка часового пояса
-TZ = pytz.timezone("Asia/Vladivostok")
+from constants import TZ
 
 logger = logging.getLogger(__name__)
 
