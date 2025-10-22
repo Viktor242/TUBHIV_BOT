@@ -89,7 +89,7 @@ class DatabaseManager:
             )
             return result.scalars().all()
     
-    async def create_user(self, tg_id: int, username: str = None):
+    async def create_user(self, tg_id: int, username: str = None, name: str = None):
         """Создает нового пользователя"""
         async with self.session_maker() as session:
             try:
@@ -101,6 +101,7 @@ class DatabaseManager:
                 user = User(
                     tg_id=tg_id,
                     username=username,
+                    name=name,  # Добавляем имя пользователя
                     language="ru",
                     deadline=deadline
                 )

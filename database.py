@@ -30,6 +30,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     tg_id = Column(BigInteger, unique=True, nullable=False, index=True)
     username = Column(String, nullable=True)
+    name = Column(String, nullable=True)  # Полное имя пользователя
     language = Column(String, default="ru")
     created_at = Column(DateTime, default=get_vladivostok_time)
     blocked = Column(Boolean, default=False)

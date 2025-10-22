@@ -256,7 +256,8 @@ class TelegramBot:
         if not user:
             user = await self.db_manager.create_user(
                 tg_id=user_id,
-                username=message.from_user.username
+                username=message.from_user.username,
+                name=message.from_user.full_name  # Добавляем имя пользователя
             )
             is_new_user = True
         
@@ -332,7 +333,8 @@ class TelegramBot:
         if not user:
             user = await self.db_manager.create_user(
                 tg_id=message.from_user.id,
-                username=message.from_user.username
+                username=message.from_user.username,
+                name=message.from_user.full_name  # Добавляем имя пользователя
             )
         
         if not user:
